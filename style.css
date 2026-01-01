@@ -1,0 +1,2871 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 辅助类 - 屏幕阅读器可见但视觉隐藏 */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+body {
+    font-family: 'Microsoft YaHei', Arial, sans-serif;
+    background: linear-gradient(135deg, #ff4757 0%, #ffa502 100%);
+    color: #333;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* 加载屏幕样式 */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ff4757 0%, #ffa502 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 1s ease-out;
+}
+
+.loading-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-content {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.loading-title {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 30px;
+    animation: loadingTitle 1.5s ease-in-out infinite alternate;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.3),
+        0 0 15px #ffd700,
+        0 0 25px #ffd700;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.loading-year {
+    display: inline-block;
+    animation: loadingYear 2s ease-in-out infinite;
+    transform-origin: center;
+    color: #ffd700;
+    font-family: 'Arial Black', sans-serif;
+}
+
+.loading-text {
+    display: inline-block;
+    animation: loadingText 2s ease-in-out infinite alternate;
+    margin-left: 10px;
+}
+
+.loading-spinner {
+    width: 80px;
+    height: 80px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #ffd700;
+    border-radius: 50%;
+    margin: 0 auto 30px;
+    animation: spin 1s linear infinite;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.loading-progress {
+    width: 300px;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ffd700, #ffed4e);
+    border-radius: 5px;
+    width: 0%;
+    transition: width 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+}
+
+.loading-decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* 加载动画关键帧 */
+@keyframes loadingTitle {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes loadingYear {
+    0%, 100% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(10deg) scale(1.1);
+    }
+}
+
+@keyframes loadingText {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(10px);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* 加载装饰元素动画 */
+.loading-decoration-item {
+    position: absolute;
+    animation: loadingDecoration 3s ease-in-out infinite;
+    opacity: 0;
+    transform-origin: center;
+}
+
+@keyframes loadingDecoration {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    25% {
+        transform: scale(1.2) rotate(180deg);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1) rotate(360deg);
+        opacity: 0.8;
+    }
+    75% {
+        transform: scale(1.1) rotate(540deg);
+        opacity: 0.6;
+    }
+    100% {
+        transform: scale(0) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* 头部样式 */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 30px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.title {
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.3),
+        0 0 15px #ffd700,  /* 金色发光 */
+        0 0 25px #ffd700;
+    margin-bottom: 10px;
+    animation: titleAnimation 2s ease-in-out;
+    letter-spacing: 2px;
+    font-family: 'Microsoft YaHei', 'Arial Black', sans-serif;
+    position: relative;
+    display: inline-block;
+    background: linear-gradient(135deg, #fff, #ffd700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.year {
+    color: #ffd700;
+    display: inline-block;
+    animation: 
+        yearAnimation 2s ease-in-out,
+        bounce 2s ease-in-out infinite,
+        goldGlow 2s ease-in-out infinite alternate;
+    transform-origin: center;
+    font-family: 'Arial Black', sans-serif;
+}
+
+.subtitle {
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    color: #fff;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.3),
+        0 0 10px rgba(255, 255, 255, 0.6),
+        0 0 20px #ffd700,
+        0 0 30px #ffd700;
+    font-style: italic;
+    animation: subtitleFadeIn 1.5s ease-in-out 0.5s both, subtitlePulse 2s ease-in-out infinite;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin-top: 20px;
+    background: linear-gradient(135deg, #fff, #ffd700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    display: inline-block;
+}
+
+/* 主内容区域 */
+.main-content {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+    animation: fadeInUp 0.8s ease-out 0.5s forwards;
+}
+
+/* 倒计时样式 */
+.countdown {
+    text-align: center;
+    margin-bottom: 50px;
+    padding: 40px;
+    background: linear-gradient(135deg, #ff6b6b, #ffa502);
+    border-radius: 20px;
+    color: #fff;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: scale(0.95) rotateY(-5deg);
+    animation: fadeInScale 0.8s ease-out 0.7s forwards;
+}
+
+.countdown::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: rotate(45deg);
+    animation: shine 3s ease-in-out infinite;
+}
+
+.countdown h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    margin-bottom: 30px;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.3),
+        0 0 10px rgba(255, 255, 255, 0.6),
+        0 0 20px #ffd700;
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+    animation: countdownTitle 1.5s ease-in-out;
+}
+
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+
+.timer-item {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 30px 25px;
+    border-radius: 15px;
+    backdrop-filter: blur(15px);
+    min-width: 120px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0 8px 20px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.timer-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.timer-item:hover {
+    transform: translateY(-5px) scale(1.05);
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 
+        0 12px 25px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.timer-item:hover::before {
+    left: 100%;
+}
+
+.timer-value {
+    display: block;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: bold;
+    color: #ffd700;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.3),
+        0 0 15px #ffd700,
+        0 0 30px #ffd700;
+    font-family: 'Arial Black', sans-serif;
+    animation: timerPulse 2s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+}
+
+.timer-label {
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
+    margin-top: 5px;
+}
+
+/* 祝福语样式 */
+.wishes {
+    margin-bottom: 50px;
+}
+
+.wishes h2 {
+    text-align: center;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: #ff4757;
+    margin-bottom: 40px;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.1),
+        0 0 10px rgba(255, 71, 87, 0.3);
+    animation: wishesTitle 1.5s ease-in-out;
+    position: relative;
+}
+
+.wishes h2::before {
+    content: '✨';
+    position: absolute;
+    left: -50px;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: sparkle 2s ease-in-out infinite alternate;
+}
+
+.wishes h2::after {
+    content: '✨';
+    position: absolute;
+    right: -50px;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: sparkle 2s ease-in-out infinite alternate 0.5s;
+}
+
+.wish-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 1s forwards;
+}
+
+.wish-card {
+    padding: 35px;
+    border-radius: 25px;
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.15),
+        0 2px 10px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+        0 0 20px rgba(255, 215, 0, 0.2);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    animation: slideInUp 0.8s ease-out forwards, cardFloat 3s ease-in-out infinite 1s;
+    background: rgba(255, 255, 255, 0.95);
+    perspective: 1000px;
+    backdrop-filter: blur(10px);
+    transform: translateZ(0);
+    opacity: 0;
+    transform: translateY(30px) rotateX(5deg) scale(0.95);
+    will-change: transform;
+}
+
+/* 卡片顶部装饰元素 */
+.wish-card::before {
+    content: '✨✨✨';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.8rem;
+    letter-spacing: 5px;
+    opacity: 0.6;
+    animation: sparkle 2s ease-in-out infinite alternate;
+    z-index: 2;
+}
+
+/* 卡片底部装饰元素 */
+.wish-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.5), transparent);
+    animation: shine 3s ease-in-out infinite;
+    z-index: 1;
+}
+
+/* 为每个卡片设置不同的渐变背景 */
+.wish-card:nth-child(1) {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    border-left: 5px solid #e74c3c;
+    animation-delay: 0.1s;
+}
+
+.wish-card:nth-child(2) {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    border-left: 5px solid #3498db;
+    animation-delay: 0.2s;
+}
+
+.wish-card:nth-child(3) {
+    background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+    border-left: 5px solid #9b59b6;
+    animation-delay: 0.3s;
+}
+
+/* 卡片角落装饰 */
+.wish-card::before {
+    content: '🎊';
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 1.5rem;
+    opacity: 0.7;
+    transform: rotate(-15deg);
+}
+
+.wish-card::after {
+    content: '🎉';
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    font-size: 1.5rem;
+    opacity: 0.7;
+    transform: rotate(15deg);
+}
+
+.wish-card:hover {
+    transform: translateY(-20px) rotateX(12deg) rotateY(12deg) scale(1.08);
+    box-shadow: 
+        0 40px 80px rgba(0, 0, 0, 0.3),
+        0 15px 30px rgba(0, 0, 0, 0.2),
+        0 0 60px rgba(255, 215, 0, 0.6),
+        inset 0 0 30px rgba(255, 255, 255, 0.7);
+    border-color: rgba(255, 215, 0, 1);
+    animation: wishCardSlideIn 1s ease-in-out, cardFloat 1.5s ease-in-out infinite, glowPulse 1s ease-in-out infinite alternate;
+    z-index: 10;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 30px;
+}
+
+/* 不同卡片的独特装饰 */
+.wish-card:nth-child(1)::before {
+    content: '🎈🎈🎈';
+}
+
+.wish-card:nth-child(2)::before {
+    content: '🎉🎉🎉';
+}
+
+.wish-card:nth-child(3)::before {
+    content: '🎊🎊🎊';
+}
+
+.wish-content {
+    position: relative;
+    z-index: 1;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.wish-content::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+    border-radius: 20px;
+    z-index: -1;
+    animation: shine 4s ease-in-out infinite;
+}
+
+.wish-content p {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    line-height: 2;
+    color: #333;
+    text-align: center;
+    font-weight: 500;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+    margin: 0;
+    padding: 20px 0;
+    animation: wishText 1.5s ease-in-out;
+    position: relative;
+    display: inline-block;
+    background: linear-gradient(135deg, #333, #555);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transform: translateZ(10px);
+}
+
+/* 互动区域样式 */
+.interaction {
+    text-align: center;
+    padding: 30px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 248, 220, 0.9));
+    border-radius: 20px;
+    margin: 20px 0;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(30px) rotateX(3deg);
+    animation: fadeInUp 0.8s ease-out 1.5s forwards;
+    z-index: 1;
+}
+
+.interaction::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%23ff4757" opacity="0.2"/></svg>');
+    background-size: 50px 50px;
+    z-index: 0;
+}
+
+.interaction h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: #ff4757;
+    margin-bottom: 30px;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.1),
+        0 0 10px rgba(255, 71, 87, 0.3);
+    position: relative;
+    z-index: 1;
+    animation: wishesTitle 1.5s ease-in-out;
+}
+
+.interaction h2::before {
+    content: '🎁';
+    position: absolute;
+    left: -50px;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.interaction h2::after {
+    content: '🎁';
+    position: absolute;
+    right: -50px;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: bounce 2s ease-in-out infinite 0.5s;
+}
+
+.wish-input {
+    width: 100%;
+    max-width: 800px;
+    min-height: 150px;
+    padding: 25px;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    border: 3px solid #ff6b6b;
+    border-radius: 25px;
+    resize: vertical;
+    margin-bottom: 30px;
+    font-family: 'Microsoft YaHei', Arial, sans-serif;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 248, 220, 0.98));
+    box-shadow: 
+        inset 0 2px 15px rgba(0, 0, 0, 0.12),
+        0 8px 25px rgba(0, 0, 0, 0.08),
+        0 0 15px rgba(255, 107, 107, 0.15);
+    position: relative;
+    z-index: 1;
+    animation: fadeIn 0.8s ease-in-out, inputPulse 3s ease-in-out infinite;
+    transform: translateZ(0);
+    backdrop-filter: blur(5px);
+}
+
+.wish-input:focus {
+    outline: none;
+    border-color: #ffa502;
+    box-shadow: 
+        inset 0 2px 12px rgba(0, 0, 0, 0.1),
+        0 0 25px rgba(255, 165, 2, 0.5),
+        0 5px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px) scale(1.02);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(255, 248, 220, 1));
+}
+
+.wish-input:hover {
+    border-color: #ff8721;
+    box-shadow: 
+        inset 0 2px 12px rgba(0, 0, 0, 0.1),
+        0 0 20px rgba(255, 135, 33, 0.3),
+        0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.wish-input::placeholder {
+    color: #ff8721;
+    opacity: 0.8;
+    font-style: italic;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.wish-input:focus::placeholder {
+    opacity: 0.5;
+    transform: translateX(10px);
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, #ff6b6b, #ff4757);
+    color: #fff;
+    border: none;
+    padding: 20px 60px;
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    border-radius: 40px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 
+        0 8px 20px rgba(255, 107, 107, 0.4),
+        0 3px 10px rgba(255, 107, 107, 0.3);
+    overflow: hidden;
+    animation: fadeIn 0.8s ease-in-out 0.2s both;
+    transform-style: preserve-3d;
+}
+
+.submit-btn::before {
+    content: '🎉';
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%) translateZ(10px);
+    font-size: 1.6rem;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.submit-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.submit-btn:hover::after {
+    left: 100%;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(135deg, #ff4757, #ff3742);
+    transform: translateY(-5px) translateZ(5px) scale(1.05);
+    box-shadow: 
+        0 12px 30px rgba(255, 71, 87, 0.6),
+        0 5px 15px rgba(255, 71, 87, 0.4),
+        0 0 20px rgba(255, 71, 87, 0.3);
+    animation: buttonPulse 0.6s ease-in-out, glowPulse 1s ease-in-out infinite alternate;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.submit-btn:active {
+    transform: translateY(-3px) translateZ(3px) scale(1.02);
+    box-shadow: 
+        0 6px 15px rgba(255, 71, 87, 0.5),
+        0 2px 5px rgba(255, 71, 87, 0.3);
+}
+
+/* 添加按钮文字装饰 */
+.submit-btn span {
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+    transform: translateZ(20px);
+}
+
+/* 添加按钮悬停时的额外装饰效果 */
+.submit-btn:hover::before {
+    content: '✨';
+    animation: sparkle 1s ease-in-out infinite alternate, bounce 1.5s ease-in-out infinite;
+}
+
+/* 焦点指示器样式 */
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 3px solid #ffd700;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.2);
+    transition: all 0.2s ease;
+}
+
+/* 移除装饰元素的焦点 */
+.snowflake:focus,
+.balloon:focus,
+.ribbon:focus {
+    outline: none;
+}
+
+/* 为可点击的用户愿望卡片添加焦点样式 */
+.user-wish:focus {
+    outline: 2px solid #2ed573;
+    outline-offset: 2px;
+    border-radius: 15px;
+}
+
+.user-wishes {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    position: relative;
+    z-index: 1;
+}
+
+.user-wish {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    padding: 25px;
+    border-radius: 15px;
+    border-left: 5px solid #2ed573;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    animation: userWishSlideIn 0.6s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.share-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 215, 0, 0.1);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.share-btn:hover {
+    background: rgba(255, 215, 0, 0.3);
+    transform: scale(1.1);
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
+}
+
+.share-btn:focus {
+    outline: 2px solid #ffd700;
+    outline-offset: 2px;
+}
+
+.copy-notification {
+    position: fixed;
+    top: 50%;
+    right: -200px;
+    background: linear-gradient(135deg, #2ed573, #27ae60);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px 0 0 8px;
+    box-shadow: -2px 2px 10px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease;
+    z-index: 1000;
+    font-weight: bold;
+}
+
+.copy-notification.show {
+    animation: slideInRight 0.3s ease forwards, slideOutRight 0.3s ease 2s forwards;
+}
+
+@keyframes slideInRight {
+    to {
+        right: 0;
+    }
+}
+
+@keyframes slideOutRight {
+    to {
+        right: -200px;
+    }
+}
+
+.user-wish::before {
+    content: '✨';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    opacity: 0.6;
+    animation: sparkle 2s ease-in-out infinite alternate;
+}
+
+.user-wish:hover {
+    transform: translateY(-5px) rotateX(3deg) rotateY(3deg);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+}
+
+.user-wish p {
+    font-size: clamp(1.1rem, 2vw, 1.2rem);
+    line-height: 1.8;
+    color: #333;
+    font-weight: 500;
+    text-align: center;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+/* 页脚样式 */
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    color: #fff;
+    font-size: 1rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* 音乐播放器样式 */
+.music-player {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.98) 0%, 
+        rgba(255, 248, 220, 0.98) 50%, 
+        rgba(255, 240, 180, 0.95) 100%);
+    border-radius: 60px;
+    padding: 25px 35px;
+    box-shadow: 
+        0 15px 50px rgba(255, 71, 87, 0.3),
+        0 0 40px rgba(255, 215, 0, 0.4),
+        inset 0 2px 0 rgba(255, 255, 255, 0.9),
+        inset 0 -2px 10px rgba(255, 107, 107, 0.1),
+        0 0 100px rgba(255, 215, 0, 0.1);
+    backdrop-filter: blur(20px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    min-width: 380px;
+    max-width: 700px;
+    width: 95%;
+    border: 4px solid rgba(255, 215, 0, 0.7);
+    animation: playerGlow 2.5s ease-in-out infinite alternate, 
+               playerFloat 6s ease-in-out infinite;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 音乐播放状态指示器 */
+.music-status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    background: #2ed573;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 
+        0 0 10px rgba(46, 213, 115, 0.8),
+        0 0 20px rgba(46, 213, 115, 0.5),
+        0 1px 3px rgba(0, 0, 0, 0.2);
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+/* 播放时的指示器动画 */
+.music-status-indicator.playing .status-dot {
+    opacity: 1;
+    animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 
+            0 0 10px rgba(46, 213, 115, 0.8),
+            0 0 20px rgba(46, 213, 115, 0.5),
+            0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+    50% {
+        transform: scale(1.3);
+        box-shadow: 
+            0 0 15px rgba(46, 213, 115, 1),
+            0 0 30px rgba(46, 213, 115, 0.8),
+            0 1px 4px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* 添加边框旋转效果 */
+.music-player::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #ff4757, #ffa502, #ffd700, #ff4757);
+    border-radius: 60px;
+    z-index: -1;
+    opacity: 0.7;
+    animation: borderRotate 10s linear infinite;
+}
+
+@keyframes borderRotate {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes playerGlow {
+    0% {
+        box-shadow: 
+            0 15px 50px rgba(255, 71, 87, 0.3),
+            0 0 40px rgba(255, 215, 0, 0.4),
+            inset 0 2px 0 rgba(255, 255, 255, 0.9),
+            inset 0 -2px 10px rgba(255, 107, 107, 0.1);
+    }
+    100% {
+        box-shadow: 
+            0 18px 60px rgba(255, 71, 87, 0.4),
+            0 0 60px rgba(255, 215, 0, 0.6),
+            inset 0 2px 0 rgba(255, 255, 255, 0.95),
+            inset 0 -2px 10px rgba(255, 107, 107, 0.15);
+    }
+}
+
+@keyframes playerFloat {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0px);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+}
+
+.music-controls {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    width: 100%;
+}
+
+.music-btn {
+    background: linear-gradient(135deg, #ff4757, #ff6b6b);
+    border: 3px solid rgba(255, 255, 255, 0.9);
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    box-shadow: 
+        0 6px 20px rgba(255, 71, 87, 0.5),
+        inset 0 2px 0 rgba(255, 255, 255, 0.4),
+        0 0 20px rgba(255, 71, 87, 0.3),
+        /* 节日按钮光环 */
+        0 0 30px rgba(255, 215, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    width: 55px;
+    height: 55px;
+    flex-shrink: 0;
+}
+
+/* 音符浮动动画 */
+@keyframes noteFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateY(-15px) rotate(180deg);
+        opacity: 0.6;
+    }
+}
+
+/* 按钮节日装饰 */
+.music-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    transition: left 0.6s ease;
+    z-index: 1;
+}
+
+.music-btn::after {
+    content: '🎶';
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    font-size: 2rem;
+    opacity: 0.3;
+    animation: noteFloat 3s ease-in-out infinite 1s;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* 额外的音符装饰 */
+.music-btn:nth-child(1)::after {
+    content: '🎵';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    font-size: 2rem;
+    opacity: 0.3;
+    animation: noteFloat 3s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.music-btn:hover {
+    background: linear-gradient(135deg, #ff3742, #ff4757);
+    transform: scale(1.2) rotate(8deg);
+    box-shadow: 
+        0 10px 30px rgba(255, 71, 87, 0.7),
+        0 0 40px rgba(255, 215, 0, 0.6),
+        inset 0 2px 0 rgba(255, 255, 255, 0.5),
+        0 0 30px rgba(255, 71, 87, 0.5);
+    border-color: #fff;
+}
+
+.music-btn:hover::before {
+    left: 100%;
+    animation: buttonShine 0.6s ease;
+}
+
+.music-btn:active {
+    transform: scale(0.95) rotate(0deg);
+    box-shadow: 
+        0 3px 10px rgba(255, 71, 87, 0.4),
+        0 0 20px rgba(255, 215, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    background: linear-gradient(135deg, #ff5252, #ff6b6b);
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+.music-btn:focus {
+    outline: none;
+    box-shadow: 
+        0 10px 30px rgba(255, 71, 87, 0.7),
+        0 0 40px rgba(255, 215, 0, 0.6),
+        0 0 0 3px rgba(255, 255, 255, 0.5),
+        inset 0 2px 0 rgba(255, 255, 255, 0.5);
+}
+
+.music-btn:focus:not(:hover) {
+    transform: scale(1.1);
+}
+
+/* 按钮点击波纹效果 */
+.music-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.music-btn:active::before {
+    width: 150px;
+    height: 150px;
+}
+
+/* 音符浮动动画 */
+@keyframes noteFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateY(-15px) rotate(15deg);
+        opacity: 0.6;
+    }
+}
+
+/* 恢复音符装饰 */
+.music-btn::after {
+    content: '🎶';
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    font-size: 2rem;
+    opacity: 0.3;
+    animation: noteFloat 3s ease-in-out infinite 1s;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* 额外的音符装饰 */
+.music-btn:nth-child(1)::after {
+    content: '🎵';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    font-size: 2rem;
+    opacity: 0.3;
+    animation: noteFloat 3s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* 按钮光泽动画 */
+@keyframes buttonShine {
+    0% {
+        left: -100%;
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        left: 100%;
+        opacity: 0.7;
+    }
+}
+
+.progress-container {
+    flex: 1;
+    margin: 0 15px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 时间显示样式 */
+.time-display {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #ff4757;
+    text-shadow: 
+        0 1px 2px rgba(0, 0, 0, 0.2),
+        0 0 5px rgba(255, 215, 0, 0.5);
+    font-family: 'Arial', sans-serif;
+    white-space: nowrap;
+    min-width: 40px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.time-display:hover {
+    color: #ff3742;
+    text-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.3),
+        0 0 10px rgba(255, 215, 0, 0.8);
+    transform: scale(1.1);
+}
+
+/* 移动端响应式设计 */
+@media (max-width: 768px) {
+    .music-player {
+        padding: 15px 20px;
+        min-width: 280px;
+        max-width: 90%;
+        gap: 15px;
+    }
+    
+    .music-controls {
+        gap: 15px;
+    }
+    
+    .music-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.4rem;
+        padding: 10px;
+    }
+    
+    .progress-container {
+        margin: 0 10px;
+        gap: 8px;
+    }
+    
+    .time-display {
+        font-size: 0.7rem;
+        min-width: 30px;
+    }
+    
+    .progress-bar {
+        height: 8px;
+    }
+    
+    .progress-fill::after {
+        width: 14px;
+        height: 14px;
+        right: -6px;
+    }
+    
+    .progress-bar:hover .progress-fill::after {
+        width: 18px;
+        height: 18px;
+        right: -8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .music-player {
+        padding: 12px 15px;
+        min-width: 260px;
+        gap: 10px;
+    }
+    
+    .music-controls {
+        gap: 10px;
+    }
+    
+    .music-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        padding: 8px;
+    }
+    
+    .progress-container {
+        margin: 0 5px;
+        gap: 5px;
+    }
+    
+    .time-display {
+        font-size: 0.65rem;
+        min-width: 28px;
+    }
+    
+    .progress-bar {
+        height: 6px;
+    }
+    
+    .progress-fill::after {
+        width: 12px;
+        height: 12px;
+        right: -5px;
+    }
+    
+    .progress-bar:hover .progress-fill::after {
+        width: 15px;
+        height: 15px;
+        right: -6px;
+    }
+}
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.9));
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid rgba(255, 215, 0, 0.7);
+    box-shadow: 
+        inset 0 3px 6px rgba(0, 0, 0, 0.15),
+        0 2px 4px rgba(255, 255, 255, 0.9),
+        0 0 10px rgba(255, 215, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.progress-bar:hover {
+    height: 14px;
+    box-shadow: 
+        inset 0 3px 8px rgba(0, 0, 0, 0.2),
+        0 2px 6px rgba(255, 255, 255, 1),
+        0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff4757, #ff6b6b, #ffa502, #ffd700);
+    border-radius: 20px;
+    width: 0%;
+    transition: width 0.1s ease;
+    box-shadow: 
+        0 0 15px rgba(255, 71, 87, 0.9), 
+        0 0 30px rgba(255, 215, 0, 0.8),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.5);
+    position: relative;
+    animation: fillGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes fillGlow {
+    0% {
+        box-shadow: 
+            0 0 15px rgba(255, 71, 87, 0.9), 
+            0 0 30px rgba(255, 215, 0, 0.8),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.5);
+    }
+    100% {
+        box-shadow: 
+            0 0 20px rgba(255, 71, 87, 1), 
+            0 0 40px rgba(255, 215, 0, 1),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.7);
+    }
+}
+
+/* 滑块脉冲动画 */
+@keyframes sliderPulse {
+    0%, 100% {
+        transform: translateY(-50%) scale(1);
+        box-shadow: 
+            0 0 15px rgba(255, 215, 0, 0.9),
+            0 0 25px rgba(255, 71, 87, 0.7),
+            0 2px 4px rgba(255, 255, 255, 0.8),
+            inset 0 1px 2px rgba(255, 255, 255, 0.8),
+            0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    50% {
+        transform: translateY(-50%) scale(1.1);
+        box-shadow: 
+            0 0 20px rgba(255, 215, 0, 1),
+            0 0 35px rgba(255, 71, 87, 0.9),
+            0 2px 6px rgba(255, 255, 255, 1),
+            inset 0 1px 2px rgba(255, 255, 255, 0.9),
+            0 0 15px rgba(255, 215, 0, 0.8);
+    }
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    background: radial-gradient(circle at 30% 30%, #fff 0%, #ffd700 40%, #ff9d00 70%, #ff6b6b 100%);
+    border-radius: 50%;
+    box-shadow: 
+        0 0 15px rgba(255, 215, 0, 0.9),
+        0 0 25px rgba(255, 71, 87, 0.7),
+        0 2px 4px rgba(255, 255, 255, 0.8),
+        /* 添加内部发光效果 */
+        inset 0 1px 2px rgba(255, 255, 255, 0.8),
+        /* 添加脉冲光晕效果 */
+        0 0 10px rgba(255, 215, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+    animation: sliderPulse 1.5s ease-in-out infinite;
+}
+
+.progress-bar:hover .progress-fill::after {
+    width: 22px;
+    height: 22px;
+    right: -10px;
+    box-shadow: 
+        0 0 20px rgba(255, 215, 0, 1),
+        0 0 35px rgba(255, 71, 87, 0.9),
+        0 3px 8px rgba(255, 255, 255, 1);
+}
+
+.music-icon {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    text-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.4),
+        0 0 10px rgba(255, 255, 255, 0.6);
+    animation: iconPulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes iconPulse {
+    0% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+    100% {
+        transform: scale(1.1);
+        filter: brightness(1.2);
+    }
+}
+
+.music-btn:hover .music-icon {
+    transform: scale(1.3) rotate(10deg);
+    animation: iconJump 0.5s ease-in-out;
+}
+
+@keyframes iconJump {
+    0%, 100% {
+        transform: scale(1.3) rotate(10deg);
+    }
+    50% {
+        transform: scale(1.5) rotate(-5deg);
+    }
+}
+
+/* 进度条时间提示 */
+.progress-container::before,
+.progress-container::after {
+    content: attr(data-current-time);
+    position: absolute;
+    top: -30px;
+    font-size: 0.9rem;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+    background: rgba(255, 71, 87, 0.8);
+    padding: 5px 10px;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgba(255, 71, 87, 0.5);
+    border: 2px solid rgba(255, 215, 0, 0.7);
+    display: none;
+}
+
+.progress-container::before {
+    left: 0;
+}
+
+.progress-container::after {
+    content: attr(data-total-time);
+    right: 0;
+}
+
+.progress-container:hover::before,
+.progress-container:hover::after {
+    display: block;
+}
+
+/* 添加节日装饰元素 */
+.music-player::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.3) 0%, transparent 30%),
+        radial-gradient(circle at 80% 70%, rgba(255, 71, 87, 0.2) 0%, transparent 25%),
+        radial-gradient(circle at 40% 80%, rgba(255, 165, 0, 0.25) 0%, transparent 20%),
+        radial-gradient(circle at 60% 20%, rgba(255, 215, 0, 0.2) 0%, transparent 25%),
+        /* 添加彩带效果 */
+        linear-gradient(45deg, transparent 48%, rgba(255, 71, 87, 0.1) 49%, transparent 50%),
+        linear-gradient(-45deg, transparent 48%, rgba(255, 215, 0, 0.1) 49%, transparent 50%),
+        /* 添加节日光斑 */
+        radial-gradient(circle at 10% 10%, rgba(255, 215, 0, 0.15) 0%, transparent 15%),
+        radial-gradient(circle at 90% 90%, rgba(255, 71, 87, 0.15) 0%, transparent 15%),
+        /* 添加音乐符号装饰 */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='rgba(255,215,0,0.3)' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z'%3E%3C/path%3E%3C/svg%3E");
+    background-size: 
+        auto, 
+        auto, 
+        auto, 
+        auto, 
+        auto, 
+        auto, 
+        auto, 
+        auto, 
+        50px 50px;
+    pointer-events: none;
+    opacity: 0.8;
+    animation: decorativeShimmer 3s ease-in-out infinite alternate;
+}
+
+/* 庆祝动画效果 */
+.celebration-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+    overflow: hidden;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #ffd700;
+    animation: confettiFall 3s ease-out forwards;
+    opacity: 0;
+    transform-origin: center;
+}
+
+@keyframes confettiFall {
+    0% {
+        opacity: 1;
+        transform: translateY(-100vh) rotate(0deg) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(100vh) rotate(360deg) scale(0.5);
+    }
+}
+
+.firework {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: #ff4757;
+    border-radius: 50%;
+    animation: firework 1.5s ease-out forwards;
+    opacity: 0;
+    transform-origin: center;
+}
+
+@keyframes firework {
+    0% {
+        opacity: 1;
+        transform: scale(0) translate(0, 0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(3) translate(0, -100px);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0) translate(0, -200px);
+    }
+}
+
+.star {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: #ffd700;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    animation: sparkle 1s ease-in-out infinite alternate;
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+@keyframes sparkle {
+    0% {
+        opacity: 0.5;
+        transform: scale(1) rotate(0deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1.5) rotate(180deg);
+    }
+}
+
+/* 雪花效果 */
+.snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.snowflake {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: fall linear infinite;
+    will-change: transform;
+}
+
+/* 不同形状的雪花 */
+.snowflake.shape1 {
+    background: radial-gradient(circle at center, #fff 0%, rgba(255,255,255,0.8) 100%);
+    border-radius: 50%;
+}
+
+.snowflake.shape2 {
+    background: none;
+    border: 2px solid white;
+    border-radius: 50%;
+}
+
+.snowflake.shape3 {
+    background: white;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.snowflake.shape4 {
+    background: white;
+    clip-path: polygon(50% 0%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0% 50%, 40% 40%);
+}
+
+.snowflake.shape5 {
+    background: radial-gradient(circle at center, #fff 0%, rgba(255,255,255,0.6) 70%, transparent 100%);
+    border-radius: 50%;
+}
+
+/* 节日装饰元素 - 气球 */
+.decorations-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    overflow: hidden;
+}
+
+.balloon {
+    position: absolute;
+    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+    animation: floatBalloon ease-in-out infinite;
+    pointer-events: none;
+    transform-origin: bottom center;
+    will-change: transform;
+}
+
+.balloon::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 20px;
+    background: #333;
+}
+
+.balloon::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+/* 不同颜色的气球 */
+.balloon.red {
+    background: radial-gradient(circle at 30% 30%, #ff6b6b, #ff4757);
+    box-shadow: 0 0 15px rgba(255, 71, 87, 0.5);
+}
+
+.balloon.blue {
+    background: radial-gradient(circle at 30% 30%, #74b9ff, #0984e3);
+    box-shadow: 0 0 15px rgba(9, 132, 227, 0.5);
+}
+
+.balloon.yellow {
+    background: radial-gradient(circle at 30% 30%, #fdcb6e, #f39c12);
+    box-shadow: 0 0 15px rgba(243, 156, 18, 0.5);
+}
+
+.balloon.green {
+    background: radial-gradient(circle at 30% 30%, #55efc4, #00b894);
+    box-shadow: 0 0 15px rgba(0, 184, 148, 0.5);
+}
+
+.balloon.purple {
+    background: radial-gradient(circle at 30% 30%, #a29bfe, #6c5ce7);
+    box-shadow: 0 0 15px rgba(108, 92, 231, 0.5);
+}
+
+/* 彩带效果 */
+.ribbons-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 4;
+    overflow: hidden;
+}
+
+.ribbon {
+    position: absolute;
+    width: 200px;
+    height: 15px;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform-origin: top left;
+    animation: waveRibbon linear infinite;
+    pointer-events: none;
+    will-change: transform;
+}
+
+.ribbon::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: inherit;
+}
+
+.ribbon::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: inherit;
+}
+
+/* 不同颜色的彩带 */
+.ribbon.red {
+    background: linear-gradient(45deg, #ff4757, #ff6b6b, #ff4757);
+    box-shadow: 0 0 10px rgba(255, 71, 87, 0.7);
+}
+
+.ribbon.blue {
+    background: linear-gradient(45deg, #0984e3, #74b9ff, #0984e3);
+    box-shadow: 0 0 10px rgba(9, 132, 227, 0.7);
+}
+
+.ribbon.yellow {
+    background: linear-gradient(45deg, #f39c12, #fdcb6e, #f39c12);
+    box-shadow: 0 0 10px rgba(243, 156, 18, 0.7);
+}
+
+.ribbon.green {
+    background: linear-gradient(45deg, #00b894, #55efc4, #00b894);
+    box-shadow: 0 0 10px rgba(0, 184, 148, 0.7);
+}
+
+.ribbon.purple {
+    background: linear-gradient(45deg, #6c5ce7, #a29bfe, #6c5ce7);
+    box-shadow: 0 0 10px rgba(108, 92, 231, 0.7);
+}
+
+.ribbon.pink {
+    background: linear-gradient(45deg, #fd79a8, #fab1a0, #fd79a8);
+    box-shadow: 0 0 10px rgba(253, 121, 168, 0.7);
+}
+
+.ribbon.orange {
+    background: linear-gradient(45deg, #fdcb6e, #e17055, #fdcb6e);
+    box-shadow: 0 0 10px rgba(253, 203, 110, 0.7);
+}
+
+.ribbon.cyan {
+    background: linear-gradient(45deg, #00cec9, #74b9ff, #00cec9);
+    box-shadow: 0 0 10px rgba(0, 206, 201, 0.7);
+}
+
+.ribbon.magenta {
+    background: linear-gradient(45deg, #e84393, #fd79a8, #e84393);
+    box-shadow: 0 0 10px rgba(232, 67, 147, 0.7);
+}
+
+/* 响应式设计 */
+/* 小型手机 */
+@media (max-width: 480px) {
+    .container {
+        padding: 5px;
+    }
+    
+    .title {
+        font-size: 1.8rem;
+        letter-spacing: 1px;
+        text-shadow: 
+            0 0 6px rgba(255, 255, 255, 0.8),
+            0 0 12px rgba(255, 255, 255, 0.5),
+            1px 1px 3px rgba(0, 0, 0, 0.3),
+            0 0 15px #ffd700,
+            0 0 20px #ffd700;
+    }
+    
+    .subtitle {
+        font-size: 1.1rem;
+        margin-top: 15px;
+    }
+    
+    .countdown h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+    
+    .countdown-timer {
+        gap: 20px;
+    }
+    
+    .timer-item {
+        min-width: 70px;
+        padding: 15px 10px;
+        border-radius: 10px;
+    }
+    
+    .timer-value {
+        font-size: 2.5rem;
+    }
+    
+    .timer-label {
+        font-size: 0.9rem;
+    }
+    
+    .wishes h2 {
+        font-size: 2rem;
+    }
+    
+    .wishes h2::before,
+    .wishes h2::after {
+        display: none;
+    }
+    
+    .wish-cards {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .wish-card {
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 20px;
+    }
+    
+    .wish-content p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+    }
+    
+    .interaction h2 {
+        font-size: 2rem;
+    }
+    
+    .interaction h2::before,
+    .interaction h2::after {
+        display: none;
+    }
+    
+    .wish-input {
+        height: 100px;
+        padding: 15px;
+        font-size: 0.9rem;
+        border-radius: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .submit-btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+        border-radius: 25px;
+        width: 100%;
+        max-width: 250px;
+    }
+    
+    .user-wishes {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .user-wish {
+        padding: 15px;
+        border-radius: 10px;
+    }
+    
+    .user-wish p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+    
+    .main-content {
+        padding: 15px;
+        border-radius: 10px;
+    }
+    
+    /* 调整装饰元素大小 */
+    .snowflake {
+        max-width: 10px;
+        max-height: 10px;
+    }
+    
+    .balloon {
+        max-width: 40px;
+        max-height: 52px;
+    }
+    
+    .ribbon {
+        max-width: 150px;
+        max-height: 10px;
+    }
+}
+
+/* 中型手机 */
+@media (min-width: 481px) and (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .title {
+        font-size: 3.5rem;
+        letter-spacing: 1px;
+    }
+    
+    .subtitle {
+        font-size: 1.5rem;
+    }
+    
+    .countdown h2 {
+        font-size: 2.2rem;
+    }
+    
+    .countdown-timer {
+        gap: 30px;
+    }
+    
+    .timer-item {
+        min-width: 85px;
+        padding: 20px 15px;
+    }
+    
+    .wish-cards {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+    }
+    
+    .user-wishes {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
+}
+
+/* 平板 */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        padding: 20px;
+    }
+    
+    .title {
+        font-size: 4rem;
+    }
+    
+    .subtitle {
+        font-size: 1.6rem;
+    }
+    
+    .countdown h2 {
+        font-size: 2.5rem;
+    }
+    
+    .countdown-timer {
+        gap: 35px;
+    }
+    
+    .wish-cards {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+    }
+    
+    .user-wishes {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+    }
+}
+
+/* 桌面设备 */
+@media (min-width: 1025px) and (max-width: 1400px) {
+    .container {
+        max-width: 1000px;
+    }
+    
+    .wish-cards {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+}
+
+/* 超大屏幕 */
+@media (min-width: 1401px) {
+    .container {
+        max-width: 1200px;
+    }
+    
+    .title {
+        font-size: 6rem;
+    }
+    
+    .subtitle {
+        font-size: 2rem;
+    }
+}
+
+/* 触摸设备优化 */
+@media (hover: none) and (pointer: coarse) {
+    .user-wish:active {
+        transform: translateY(-3px) rotateX(1deg) rotateY(1deg);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .timer-item:active {
+        transform: translateY(-5px) scale(1.05);
+        background: rgba(255, 255, 255, 0.25);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    }
+    
+    .wish-card:active {
+        transform: translateY(-10px) rotateX(5deg) rotateY(5deg) scale(1.03);
+        box-shadow: 
+            0 20px 40px rgba(0, 0, 0, 0.2),
+            0 5px 15px rgba(0, 0, 0, 0.15),
+            0 0 30px rgba(255, 215, 0, 0.3);
+        border-color: rgba(255, 215, 0, 0.8);
+    }
+    
+    .submit-btn:active {
+        transform: translateY(-3px) translateZ(3px) scale(1.02);
+        box-shadow: 
+            0 6px 15px rgba(255, 71, 87, 0.5),
+            0 2px 5px rgba(255, 71, 87, 0.3);
+    }
+}
+
+/* 动画效果 */
+@keyframes titleAnimation {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+        filter: blur(10px);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+@keyframes titleSparkle {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    25% {
+        transform: scale(1.05) rotate(1deg);
+        opacity: 0.9;
+    }
+    75% {
+        transform: scale(1.02) rotate(-1deg);
+        opacity: 0.95;
+    }
+}
+
+@keyframes yearAnimation {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(10deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-10vh) translateX(0) rotate(0deg) rotateX(0deg) rotateY(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    25% {
+        transform: translateY(25vh) translateX(calc(var(--sway) * 0.3)) rotate(90deg) rotateX(15deg) rotateY(15deg);
+        opacity: 0.9;
+    }
+    50% {
+        transform: translateY(50vh) translateX(calc(var(--sway) * 0.6)) rotate(180deg) rotateX(30deg) rotateY(30deg);
+        opacity: 0.9;
+    }
+    75% {
+        transform: translateY(75vh) translateX(calc(var(--sway) * 0.8)) rotate(270deg) rotateX(45deg) rotateY(45deg);
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(110vh) translateX(var(--sway)) rotate(360deg) rotateX(60deg) rotateY(60deg);
+        opacity: 0;
+    }
+}
+
+/* 不同大小雪花的动画延迟和持续时间 */
+.snowflake.small {
+    animation-duration: calc(var(--duration) * 1.2);
+}
+
+.snowflake.medium {
+    animation-duration: calc(var(--duration) * 0.9);
+}
+
+.snowflake.large {
+    animation-duration: calc(var(--duration) * 0.7);
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.98);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.95) rotateY(-5deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotateY(0deg);
+    }
+}
+
+@keyframes slideInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) rotateX(5deg) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotateX(0deg) scale(1);
+    }
+}
+
+/* 新增动画效果 */
+@keyframes glowPulse {
+    0% {
+        text-shadow: 
+            0 0 10px rgba(255, 255, 255, 0.8),
+            0 0 20px rgba(255, 255, 255, 0.5),
+            3px 3px 6px rgba(0, 0, 0, 0.3),
+            0 0 30px #ffd700,
+            0 0 40px #ffd700,
+            0 0 50px #ffd700;
+    }
+    100% {
+        text-shadow: 
+            0 0 15px rgba(255, 255, 255, 1),
+            0 0 25px rgba(255, 255, 255, 0.7),
+            3px 3px 6px rgba(0, 0, 0, 0.3),
+            0 0 40px #ffd700,
+            0 0 50px #ffd700,
+            0 0 60px #ffd700,
+            0 0 70px #ffd700;
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    40% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+    60% {
+        transform: translateY(-10px) rotate(-5deg);
+    }
+}
+
+@keyframes goldGlow {
+    0% {
+        color: #ffd700;
+        text-shadow: 0 0 10px #ffd700;
+    }
+    100% {
+        color: #fff;
+        text-shadow: 
+            0 0 10px #ffd700,
+            0 0 20px #ffd700,
+            0 0 30px #ffd700,
+            0 0 40px #ffd700;
+    }
+}
+
+@keyframes subtitleFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+        text-shadow: none;
+        filter: blur(5px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        text-shadow: 
+            2px 2px 4px rgba(0, 0, 0, 0.3),
+            0 0 10px rgba(255, 255, 255, 0.6),
+            0 0 20px #ffd700,
+            0 0 30px #ffd700;
+        filter: blur(0);
+    }
+}
+
+@keyframes subtitlePulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+        text-shadow: 
+            2px 2px 4px rgba(0, 0, 0, 0.3),
+            0 0 15px rgba(255, 255, 255, 0.8),
+            0 0 30px #ffd700,
+            0 0 40px #ffd700,
+            0 0 50px #ffd700;
+    }
+}
+
+/* 倒计时动画效果 */
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+}
+
+@keyframes countdownTitle {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes timerPulse {
+    0% {
+        transform: scale(1);
+        text-shadow: 
+            2px 2px 4px rgba(0, 0, 0, 0.3),
+            0 0 15px #ffd700,
+            0 0 30px #ffd700;
+    }
+    50% {
+        transform: scale(1.05);
+        text-shadow: 
+            2px 2px 4px rgba(0, 0, 0, 0.3),
+            0 0 20px #ffd700,
+            0 0 40px #ffd700,
+            0 0 50px #ffd700;
+    }
+    100% {
+        transform: scale(1);
+        text-shadow: 
+            2px 2px 4px rgba(0, 0, 0, 0.3),
+            0 0 15px #ffd700,
+            0 0 30px #ffd700;
+    }
+}
+
+/* 祝福语动画效果 */
+@keyframes wishesTitle {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes wishCardSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(50px) rotateX(10deg) scale(0.9);
+        filter: blur(5px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotateX(0deg) scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes cardFloat {
+    0%, 100% {
+        transform: translateY(0) rotateX(0deg) rotateY(0deg) scale(1);
+    }
+    25% {
+        transform: translateY(-8px) rotateX(3deg) rotateY(5deg) scale(1.02);
+    }
+    50% {
+        transform: translateY(-5px) rotateX(-2deg) rotateY(-3deg) scale(1.01);
+    }
+    75% {
+        transform: translateY(-10px) rotateX(5deg) rotateY(3deg) scale(1.03);
+    }
+}
+
+@keyframes wishText {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes sparkle {
+    0% {
+        transform: translateY(-50%) scale(0.8);
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(-50%) scale(1.2);
+        opacity: 1;
+    }
+}
+
+@keyframes celebration {
+    0% {
+        transform: rotate(-15deg) scale(1);
+    }
+    50% {
+        transform: rotate(15deg) scale(1.3);
+    }
+    100% {
+        transform: rotate(-15deg) scale(1);
+    }
+}
+
+/* 新增按钮和用户愿望动画 */
+@keyframes buttonPulse {
+    0% {
+        transform: translateY(-3px) scale(1) rotateY(0deg);
+    }
+    50% {
+        transform: translateY(-3px) scale(1.05) rotateY(5deg);
+    }
+    100% {
+        transform: translateY(-3px) scale(1) rotateY(0deg);
+    }
+}
+
+/* 新增按钮点击涟漪动画 */
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+@keyframes userWishSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95) rotateX(5deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotateX(0deg);
+    }
+}
+
+/* 气球和彩带动画 */
+@keyframes floatBalloon {
+    0%, 100% {
+        transform: translateY(0) translateX(0) rotate(0deg) scale(1) rotateY(0deg);
+    }
+    25% {
+        transform: translateY(-40px) translateX(25px) rotate(15deg) scale(1.05) rotateY(10deg);
+    }
+    50% {
+        transform: translateY(-25px) translateX(-25px) rotate(-10deg) scale(1) rotateY(0deg);
+    }
+    75% {
+        transform: translateY(-45px) translateX(15px) rotate(8deg) scale(1.02) rotateY(-5deg);
+    }
+}
+
+@keyframes waveRibbon {
+    0% {
+        transform: rotate(0deg) translateX(-100px) translateY(0) scaleX(0.8) rotateY(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    25% {
+        transform: rotate(90deg) translateX(25vw) translateY(25vh) scaleX(1.0) rotateY(45deg);
+        opacity: 0.9;
+    }
+    50% {
+        transform: rotate(180deg) translateX(50vw) translateY(50vh) scaleX(1.2) rotateY(0deg);
+        opacity: 0.8;
+    }
+    75% {
+        transform: rotate(270deg) translateX(75vw) translateY(75vh) scaleX(1.0) rotateY(-45deg);
+        opacity: 0.9;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(360deg) translateX(100vw) translateY(100vh) scaleX(0.8) rotateY(0deg);
+        opacity: 0;
+    }
+}
+
+/* 气球上升动画 */
+@keyframes riseBalloon {
+    0% {
+        transform: translateY(100vh) scale(0.8) rotate(0deg) rotateY(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    25% {
+        transform: translateY(75vh) scale(0.9) rotate(90deg) rotateY(45deg);
+    }
+    50% {
+        transform: translateY(50vh) scale(1.0) rotate(180deg) rotateY(0deg);
+        opacity: 0.9;
+    }
+    75% {
+        transform: translateY(25vh) scale(1.2) rotate(270deg) rotateY(-45deg);
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-120vh) scale(1.5) rotate(360deg) rotateY(0deg);
+        opacity: 0;
+    }
+}
+
+/* 增强的气球发光效果 */
+@keyframes balloonGlow {
+    0%, 100% {
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px currentColor;
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(255, 255, 255, 1), 0 0 45px currentColor;
+    }
+}
+
+/* 彩带飘动效果 */
+@keyframes ribbonFlutter {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) scaleX(1) rotateY(0deg);
+    }
+    12.5% {
+        transform: translateY(-8px) rotate(8deg) scaleX(1.05) rotateY(15deg);
+    }
+    25% {
+        transform: translateY(-5px) rotate(5deg) scaleX(1.02) rotateY(10deg);
+    }
+    37.5% {
+        transform: translateY(-10px) rotate(10deg) scaleX(1.08) rotateY(20deg);
+    }
+    50% {
+        transform: translateY(-6px) rotate(0deg) scaleX(1) rotateY(0deg);
+    }
+    62.5% {
+        transform: translateY(-12px) rotate(-12deg) scaleX(1.1) rotateY(-25deg);
+    }
+    75% {
+        transform: translateY(-8px) rotate(-8deg) scaleX(1.07) rotateY(-15deg);
+    }
+    87.5% {
+        transform: translateY(-5px) rotate(-5deg) scaleX(1.04) rotateY(-10deg);
+    }
+}
+
+/* 加载动画响应式样式 */
+@media (max-width: 768px) {
+    .loading-title {
+        font-size: 3rem;
+    }
+    
+    .loading-spinner {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .loading-progress {
+        width: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .loading-title {
+        font-size: 2rem;
+    }
+    
+    .loading-spinner {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .loading-progress {
+        width: 200px;
+    }
+}
+    
+    .timer-item {
+        min-width: 70px;
+        padding: 12px 10px;
+        border-radius: 10px;
+    }
+    
+    .countdown-timer {
+        gap: 15px;
+    }
+    
+    .timer-label {
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+    }
+    
+    /* 主内容区域内边距优化 */
+    .main-content {
+        padding: 25px 15px;
+    }
+    
+    /* 愿望卡片样式优化 */
+    .wishes h2,
+    .interaction h2 {
+        font-size: 1.6rem;
+        margin-bottom: 25px;
+    }
+    
+    .wish-card {
+        padding: 20px 15px;
+        margin-bottom: 20px;
+    }
+    
+    .wish-content {
+        padding: 15px;
+    }
+    
+    .wish-content p {
+        font-size: 1.1rem;
+        line-height: 1.7;
+    }
+    
+    /* 优化交互区域 */
+    .interaction {
+        padding: 20px 15px;
+    }
+    
+    .wish-input {
+        height: 100px;
+        padding: 15px;
+        font-size: 1rem;
+        border-radius: 12px;
+    }
+    
+    .submit-btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 250px;
+        border-radius: 25px;
+        letter-spacing: 1px;
+    }
+    
+    .submit-btn::before {
+        font-size: 1.2rem;
+        left: 12px;
+    }
+    
+    /* 优化用户愿望卡片 */
+    .user-wishes {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        margin-top: 30px;
+    }
+    
+    .user-wish {
+        padding: 18px;
+        border-radius: 12px;
+    }
+    
+    .user-wish p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    
+    /* 页脚样式优化 */
+    .footer {
+        font-size: 0.8rem;
+        padding: 15px 10px;
+        text-align: center;
+    }
+    
+    /* 调整装饰元素 */
+    .balloon {
+        max-width: 40px;
+        max-height: 50px;
+    }
+    
+    .ribbon {
+        max-width: 100px;
+        max-height: 12px;
+    }
+    
+
+    
+    /* 优化按钮和输入框在移动设备上的触摸区域 */
+    .submit-btn {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .wish-input {
+        touch-action: manipulation;
+    }
+    
+    /* 调整容器内边距 */
+    .container {
+        padding: 8px;
+    }
+    
+    /* 调整标题装饰元素 */
+    .wishes h2::before,
+    .wishes h2::after,
+    .interaction h2::before,
+    .interaction h2::after {
+        display: none;
+    }
+    
+    /* 优化提交按钮在移动设备上的样式 */
+    .submit-btn {
+        display: block;
+        margin: 0 auto;
+    }
+    
+    /* 优化页脚样式 */
+    .footer {
+        font-size: 0.9rem;
+        padding: 15px;
+    }
+    
+    /* 调整雪花大小以适应移动设备 */
+    .snowflake {
+        max-width: 10px;
+        max-height: 10px;
+    }
+    
+    /* 优化触摸设备上的滚动体验 */
+    body {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+    .interaction h2::before,
+    .interaction h2::after {
+        display: none;
+    }
+/* 针对平板设备的优化 */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        max-width: 90%;
+    }
+    
+    .title {
+        font-size: 4rem;
+    }
+    
+    .wish-cards {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+    }
+}
+
+/* 优化触摸设备体验 */
+@media (hover: none) and (pointer: coarse) {
+    /* 触摸设备没有真正的hover状态，使用active代替 */
+    .wish-card:active {
+        transform: translateY(-5px) rotateX(2deg) rotateY(2deg) scale(1.02);
+        box-shadow: 
+            0 20px 40px rgba(0, 0, 0, 0.2),
+            0 5px 15px rgba(0, 0, 0, 0.15),
+            0 0 30px rgba(255, 215, 0, 0.3);
+    }
+    
+    .user-wish:active {
+        transform: translateY(-3px) rotateX(1deg) rotateY(1deg);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .timer-item:active {
+        transform: translateY(-5px) scale(1.05);
+        background: rgba(255, 255, 255, 0.25);
+        box-shadow: 
+            0 12px 25px rgba(0, 0, 0, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        border-color: rgba(255, 255, 255, 0.5);
+    }
+    
+    /* 优化按钮触摸反馈 */
+    .submit-btn:active {
+        transform: translateY(-1px) scale(0.98);
+        box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+    }
+    
+    /* 禁用触摸高亮 */
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* 优化滚动体验 */
+    body {
+        touch-action: manipulation;
+    }
+}

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026元旦节祝福语</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 页面加载动画 -->
+    <div class="loading-screen" id="loadingScreen" aria-busy="true" aria-live="polite">
+        <div class="loading-content">
+            <div class="loading-title">
+                <span class="loading-year">2026</span>
+                <span class="loading-text">元旦快乐</span>
+            </div>
+            <div class="loading-spinner" role="status" aria-label="加载中..."></div>
+            <div class="loading-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+            <div class="loading-decoration">
+                <!-- 加载时的装饰元素将由JavaScript生成 -->
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <!-- 顶部标题 -->
+        <header class="header">
+            <h1 class="title">2026<span class="year">元旦快乐</span></h1>
+            <p class="subtitle">新年快乐 · 万事如意</p>
+        </header>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <!-- 倒计时部分 -->
+            <section class="countdown">
+                <h2>2026年已经到来！</h2>
+                <div class="countdown-timer">
+                    <div class="timer-item">
+                        <span class="timer-value" id="days">00</span>
+                        <span class="timer-label">天</span>
+                    </div>
+                    <div class="timer-item">
+                        <span class="timer-value" id="hours">00</span>
+                        <span class="timer-label">时</span>
+                    </div>
+                    <div class="timer-item">
+                        <span class="timer-value" id="minutes">00</span>
+                        <span class="timer-label">分</span>
+                    </div>
+                    <div class="timer-item">
+                        <span class="timer-value" id="seconds">00</span>
+                        <span class="timer-label">秒</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 祝福语部分 -->
+            <section class="wishes">
+                <h2>元旦祝福语</h2>
+                <div class="wish-cards">
+                    <div class="wish-card">
+                        <div class="wish-content">
+                            <p>愿新年的钟声敲响你心中快乐的音符，幸运与平安如春天的脚步紧紧相随！</p>
+                        </div>
+                    </div>
+                    <div class="wish-card">
+                        <div class="wish-content">
+                            <p>新的一年，新的开始，新的希望，愿你在2026年收获满满，幸福安康！</p>
+                        </div>
+                    </div>
+                    <div class="wish-card">
+                        <div class="wish-content">
+                            <p>元旦快乐！愿你的生活充满阳光，事业蒸蒸日上，家庭幸福美满！</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 互动部分 -->
+            <section class="interaction">
+                <h2 id="wishHeading">写下你的新年愿望</h2>
+                <textarea class="wish-input" placeholder="在这里写下你的新年愿望..." id="wishInput" aria-labelledby="wishHeading" aria-describedby="wishDescription" rows="5"></textarea>
+                <div id="wishDescription" class="sr-only">请输入你的新年愿望，最多200个字符</div>
+                <button class="submit-btn" id="submitWish" aria-label="提交新年愿望"><span>提交愿望</span></button>
+                <div class="user-wishes" id="userWishes" aria-live="polite" aria-label="用户愿望列表"></div>
+            </section>
+        </main>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <p>&copy; 2026 元旦快乐 | 祝你新年快乐，万事如意！</p>
+        </footer>
+    </div>
+
+    <!-- 雪花效果 -->
+    <div class="snow-container" id="snowContainer"></div>
+    
+    <!-- 节日装饰元素 -->
+    <div class="decorations-container" id="decorationsContainer"></div>
+    <div class="ribbons-container" id="ribbonsContainer"></div>
+
+    <!-- 音乐播放器 -->
+    <div class="music-player">
+        <audio id="backgroundMusic" loop preload="metadata">
+            <source src="music.mp3" type="audio/mpeg">
+            您的浏览器不支持音频播放。
+        </audio>
+        <!-- 音乐播放状态指示器 -->
+        <div class="music-status-indicator" id="musicStatusIndicator">
+            <div class="status-dot"></div>
+        </div>
+        <div class="music-controls">
+            <button id="playPauseBtn" class="music-btn" aria-label="播放/暂停音乐">
+                <span class="music-icon">▶️</span>
+            </button>
+            <div class="progress-container">
+                <div class="time-display current-time" id="currentTime">00:00</div>
+                <div class="progress-bar" id="progressBar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="time-display total-time" id="totalTime">00:00</div>
+            </div>
+            <button id="muteBtn" class="music-btn" aria-label="静音/取消静音">
+                <span class="music-icon">🔊</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
