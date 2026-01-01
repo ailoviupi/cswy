@@ -5,18 +5,7 @@
     box-sizing: border-box;
 }
 
-/* 辅助类 - 屏幕阅读器可见但视觉隐藏 */
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
+
 
 body {
     font-family: 'Microsoft YaHei', Arial, sans-serif;
@@ -164,36 +153,7 @@ body {
     }
 }
 
-/* 加载装饰元素动画 */
-.loading-decoration-item {
-    position: absolute;
-    animation: loadingDecoration 3s ease-in-out infinite;
-    opacity: 0;
-    transform-origin: center;
-}
 
-@keyframes loadingDecoration {
-    0% {
-        transform: scale(0) rotate(0deg);
-        opacity: 0;
-    }
-    25% {
-        transform: scale(1.2) rotate(180deg);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1) rotate(360deg);
-        opacity: 0.8;
-    }
-    75% {
-        transform: scale(1.1) rotate(540deg);
-        opacity: 0.6;
-    }
-    100% {
-        transform: scale(0) rotate(720deg);
-        opacity: 0;
-    }
-}
 
 .container {
     max-width: 1200px;
@@ -214,25 +174,28 @@ body {
 
 .title {
     font-size: clamp(2.5rem, 8vw, 6rem);
-    font-weight: bold;
-    color: #fff;
+    font-weight: 900;
+    color: #ffd700;
     text-shadow: 
-        2px 2px 4px rgba(0, 0, 0, 0.3),
-        0 0 15px #ffd700,  /* 金色发光 */
-        0 0 25px #ffd700;
+        0 0 2px rgba(0, 0, 0, 0.8),
+        1px 1px 2px rgba(0, 0, 0, 0.5),
+        0 0 5px rgba(255, 215, 0, 0.8);
     margin-bottom: 10px;
     animation: titleAnimation 2s ease-in-out;
     letter-spacing: 2px;
-    font-family: 'Microsoft YaHei', 'Arial Black', sans-serif;
+    font-family: 'Microsoft YaHei', 'Arial Black', 'Impact', sans-serif;
     position: relative;
     display: inline-block;
-    background: linear-gradient(135deg, #fff, #ffd700);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.7);
+    line-height: 1.1;
 }
 
 .year {
@@ -243,7 +206,14 @@ body {
         bounce 2s ease-in-out infinite,
         goldGlow 2s ease-in-out infinite alternate;
     transform-origin: center;
-    font-family: 'Arial Black', sans-serif;
+    font-family: 'Microsoft YaHei', 'Arial Black', 'Impact', sans-serif;
+    font-weight: 900;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.7);
 }
 
 .subtitle {
@@ -2312,15 +2282,16 @@ select:focus {
 @keyframes goldGlow {
     0% {
         color: #ffd700;
-        text-shadow: 0 0 10px #ffd700;
+        text-shadow: 
+            0 0 2px rgba(0, 0, 0, 0.8),
+            0 0 5px rgba(255, 215, 0, 0.8);
     }
     100% {
         color: #fff;
         text-shadow: 
-            0 0 10px #ffd700,
-            0 0 20px #ffd700,
-            0 0 30px #ffd700,
-            0 0 40px #ffd700;
+            0 0 2px rgba(0, 0, 0, 0.8),
+            0 0 10px rgba(255, 215, 0, 1),
+            0 0 15px rgba(255, 215, 0, 0.8);
     }
 }
 
@@ -2589,43 +2560,7 @@ select:focus {
     }
 }
 
-/* 增强的气球发光效果 */
-@keyframes balloonGlow {
-    0%, 100% {
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px currentColor;
-    }
-    50% {
-        box-shadow: 0 0 25px rgba(255, 255, 255, 1), 0 0 45px currentColor;
-    }
-}
 
-/* 彩带飘动效果 */
-@keyframes ribbonFlutter {
-    0%, 100% {
-        transform: translateY(0) rotate(0deg) scaleX(1) rotateY(0deg);
-    }
-    12.5% {
-        transform: translateY(-8px) rotate(8deg) scaleX(1.05) rotateY(15deg);
-    }
-    25% {
-        transform: translateY(-5px) rotate(5deg) scaleX(1.02) rotateY(10deg);
-    }
-    37.5% {
-        transform: translateY(-10px) rotate(10deg) scaleX(1.08) rotateY(20deg);
-    }
-    50% {
-        transform: translateY(-6px) rotate(0deg) scaleX(1) rotateY(0deg);
-    }
-    62.5% {
-        transform: translateY(-12px) rotate(-12deg) scaleX(1.1) rotateY(-25deg);
-    }
-    75% {
-        transform: translateY(-8px) rotate(-8deg) scaleX(1.07) rotateY(-15deg);
-    }
-    87.5% {
-        transform: translateY(-5px) rotate(-5deg) scaleX(1.04) rotateY(-10deg);
-    }
-}
 
 /* 加载动画响应式样式 */
 @media (max-width: 768px) {
@@ -2643,6 +2578,7 @@ select:focus {
     }
 }
 
+/* 小型手机 */
 @media (max-width: 480px) {
     .loading-title {
         font-size: 2rem;
@@ -2656,7 +2592,10 @@ select:focus {
     .loading-progress {
         width: 200px;
     }
-}
+    
+    .container {
+        padding: 5px;
+    }
     
     .timer-item {
         min-width: 70px;
@@ -2709,6 +2648,7 @@ select:focus {
         padding: 15px;
         font-size: 1rem;
         border-radius: 12px;
+        touch-action: manipulation;
     }
     
     .submit-btn {
@@ -2718,6 +2658,10 @@ select:focus {
         max-width: 250px;
         border-radius: 25px;
         letter-spacing: 1px;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        display: block;
+        margin: 0 auto;
     }
     
     .submit-btn::before {
@@ -2760,23 +2704,6 @@ select:focus {
         max-height: 12px;
     }
     
-
-    
-    /* 优化按钮和输入框在移动设备上的触摸区域 */
-    .submit-btn {
-        touch-action: manipulation;
-        -webkit-tap-highlight-color: transparent;
-    }
-    
-    .wish-input {
-        touch-action: manipulation;
-    }
-    
-    /* 调整容器内边距 */
-    .container {
-        padding: 8px;
-    }
-    
     /* 调整标题装饰元素 */
     .wishes h2::before,
     .wishes h2::after,
@@ -2784,18 +2711,13 @@ select:focus {
     .interaction h2::after {
         display: none;
     }
-    
-    /* 优化提交按钮在移动设备上的样式 */
-    .submit-btn {
-        display: block;
-        margin: 0 auto;
-    }
-    
-    /* 优化页脚样式 */
-    .footer {
-        font-size: 0.9rem;
-        padding: 15px;
-    }
+}
+
+/* 优化页脚样式 */
+.footer {
+    font-size: 0.9rem;
+    padding: 15px;
+}
     
     /* 调整雪花大小以适应移动设备 */
     .snowflake {

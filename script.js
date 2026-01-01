@@ -280,13 +280,13 @@ function createSnowflakes() {
     const snowContainer = document.getElementById('snowContainer');
     
     // 大幅减少雪花数量，提高性能
-    let snowflakeCount = 60;
+    let snowflakeCount = 50;
     if (window.innerWidth <= 480) {
-        snowflakeCount = 15; // 小屏移动设备进一步减少雪花数量
+        snowflakeCount = 10; // 小屏移动设备进一步减少雪花数量
     } else if (window.innerWidth <= 768) {
-        snowflakeCount = 25; // 移动设备进一步减少雪花数量
+        snowflakeCount = 20; // 移动设备进一步减少雪花数量
     } else if (window.innerWidth <= 1024) {
-        snowflakeCount = 35; // 平板设备进一步减少雪花数量
+        snowflakeCount = 30; // 平板设备进一步减少雪花数量
     }
     
     // 使用 requestAnimationFrame 分批创建雪花，减少主线程阻塞
@@ -295,9 +295,12 @@ function createSnowflakes() {
     
     function createBatch() {
         const end = Math.min(created + batchSize, snowflakeCount);
+        const fragment = document.createDocumentFragment();
         for (let i = created; i < end; i++) {
-            createSnowflake(snowContainer);
+            createSnowflake(fragment);
         }
+        // 批量添加到DOM，减少重排重绘
+        snowContainer.appendChild(fragment);
         created = end;
         
         if (created < snowflakeCount) {
@@ -410,13 +413,13 @@ function createBalloons() {
     const colors = ['red', 'blue', 'yellow', 'green', 'purple', 'pink', 'orange', 'cyan'];
     
     // 进一步减少气球数量，提高性能
-    let balloonCount = 15;
+    let balloonCount = 10;
     if (window.innerWidth <= 480) {
-        balloonCount = 4; // 小屏移动设备进一步减少气球数量
+        balloonCount = 3; // 小屏移动设备进一步减少气球数量
     } else if (window.innerWidth <= 768) {
-        balloonCount = 6; // 移动设备进一步减少气球数量
+        balloonCount = 5; // 移动设备进一步减少气球数量
     } else if (window.innerWidth <= 1024) {
-        balloonCount = 9; // 平板设备进一步减少气球数量
+        balloonCount = 7; // 平板设备进一步减少气球数量
     }
     
     // 使用 requestAnimationFrame 分批创建气球，减少主线程阻塞
@@ -425,9 +428,12 @@ function createBalloons() {
     
     function createBatch() {
         const end = Math.min(created + batchSize, balloonCount);
+        const fragment = document.createDocumentFragment();
         for (let i = created; i < end; i++) {
-            createBalloon(container, colors);
+            createBalloon(fragment, colors);
         }
+        // 批量添加到DOM，减少重排重绘
+        container.appendChild(fragment);
         created = end;
         
         if (created < balloonCount) {
@@ -508,13 +514,13 @@ function createRibbons() {
     const colors = ['red', 'blue', 'yellow', 'green', 'purple', 'pink', 'orange', 'cyan', 'magenta'];
     
     // 进一步减少彩带数量，提高性能
-    let ribbonCount = 25;
+    let ribbonCount = 20;
     if (window.innerWidth <= 480) {
-        ribbonCount = 8; // 小屏移动设备进一步减少彩带数量
+        ribbonCount = 6; // 小屏移动设备进一步减少彩带数量
     } else if (window.innerWidth <= 768) {
-        ribbonCount = 12; // 移动设备进一步减少彩带数量
+        ribbonCount = 10; // 移动设备进一步减少彩带数量
     } else if (window.innerWidth <= 1024) {
-        ribbonCount = 18; // 平板设备进一步减少彩带数量
+        ribbonCount = 15; // 平板设备进一步减少彩带数量
     }
     
     // 使用 requestAnimationFrame 分批创建彩带，减少主线程阻塞
@@ -523,9 +529,12 @@ function createRibbons() {
     
     function createBatch() {
         const end = Math.min(created + batchSize, ribbonCount);
+        const fragment = document.createDocumentFragment();
         for (let i = created; i < end; i++) {
-            createRibbon(container, colors);
+            createRibbon(fragment, colors);
         }
+        // 批量添加到DOM，减少重排重绘
+        container.appendChild(fragment);
         created = end;
         
         if (created < ribbonCount) {
@@ -714,8 +723,8 @@ function initMusicPlayer() {
     const audio = document.getElementById('backgroundMusic');
     const playPauseBtn = document.getElementById('playPauseBtn');
     const muteBtn = document.getElementById('muteBtn');
-    const progressBar = document.getElementById('progressBar');
-    const progressFill = document.getElementById('progressFill');
+    const progressBar = document.getElementById('musicProgressBar');
+    const progressFill = document.getElementById('musicProgressFill');
     const currentTimeEl = document.getElementById('currentTime');
     const totalTimeEl = document.getElementById('totalTime');
     const statusIndicator = document.getElementById('musicStatusIndicator'); // 添加状态指示器
@@ -911,9 +920,9 @@ function triggerCelebration() {
     const isLowMemory = 'deviceMemory' in navigator && navigator.deviceMemory < 4;
     
     // 计算优化后的元素数量
-    const baseConfettiCount = isMobile ? 30 : (isTablet ? 60 : 100);
-    const baseFireworkCount = isMobile ? 3 : (isTablet ? 5 : 8);
-    const baseStarCount = isMobile ? 20 : (isTablet ? 40 : 60);
+    const baseConfettiCount = isMobile ? 20 : (isTablet ? 40 : 80);
+    const baseFireworkCount = isMobile ? 2 : (isTablet ? 3 : 6);
+    const baseStarCount = isMobile ? 15 : (isTablet ? 30 : 50);
     
     // 低内存设备进一步减少元素数量
     const confettiCount = isLowMemory ? Math.floor(baseConfettiCount * 0.7) : baseConfettiCount;
